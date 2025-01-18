@@ -102,6 +102,12 @@ Após importar os dados, verifique se foram carregados corretamente:
     SELECT * FROM olist.order_payments LIMIT 10;
     ```
 
+6. **Instrução de uso (Git Bash)**
+    * **Clone o repositório:**
+    Abra o Git Bash e execute o comando
+        ```
+        git clone https://github.com/muller-pereira/projeto_ecommerce.git
+        ```
 ## Tratamento de Dados
 
 1. Verficar se existem dados duplicados ou nulos em cada tabela. Caso necessário, tratar esses dados.\
