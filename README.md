@@ -140,49 +140,72 @@ As querys (consultas) estão localizadas na pasta querys deste projeto.
 ## Resultados  | :memo:
 * A **média de vendas mensais** foi de 4194,7, porém o desvio padrão foi de 2426,64, o que indica que os dados estão muito dispersos. Em outras palavras, tiveram meses com muitas vendas e meses com pouquísimas vendas. Isso fica evidenciado na imagem a seguir:
 
-* **Categorias de Produtos que mais venderam:**\
-Alguns fatores podem ter contribuído para que essas categorias tivessem mais vendas:
-    1. **Cama, Mesa, Banho:** Esses itens são essenciais para qualquer residência, e as pessoas frequentemente investem em móveis de qualidade para o conforto e funcionalidade do lar.
-    2. **Beleza e Saúde:** Produtos de beleza e saúde são comprados regularmente, pois fazem parte da rotina diária e dos cuidados pessoais. A demanda constante por esses produtos contribui para suas altas vendas.
-    3. **Esporte e Lazer:** A popularidade de produtos esportivos e de lazer pode ser atribuída ao aumento do interesse em atividades físicas e hobbies. Muitas pessoas buscam melhorar seu bem-estar e se divertir em seu tempo livre.
-    4. **Informática e Acessórios:** Nos dias de hoje, a tecnologia é uma parte central da vida cotidiana. Produtos como laptops, tablets, acessórios e periféricos são frequentemente atualizados, levando a uma alta demanda.
-    5. **Móveis e Decoração:** A decoração do lar é uma forma de expressão pessoal e muitas pessoas gostam de renovar e personalizar seus espaços. Produtos de móveis e decoração são populares para criar ambientes acolhedores e estilosos.
-* **Categorias de Produtos que menos venderam:**\
-Esses fatores podem ter contribuído para que essas categorias tivessem menos vendas:
-    1. **Seguros e Serviços:** Esses produtos são comprados com pouca frequência, pois os serviços são contratados por períodos longos, como anualmente, e a decisão de contratar um seguro pode ser complexa.
-    2. **PC Gamer:**  Produtos para gamers têm um público específico e vendem menos em comparação com categorias mais amplas. Seu preço elevado pode limitar o número de compradores.
-    3. **Fashion - Roupas Infantojuvenis:** A demanda por roupas infantis e juvenis é sazonal e depende da idade das crianças e de suas preferências de estilo.
-    4. **CDS e DVDs Musicais:** Com o crescimento do streaming, a demanda por CDs e DVDs caiu, pois muitos preferem a conveniência do streaming.
-    5. **La Cuisine:** Produtos de cozinha podem ter vendas baixas sem promoção ou alta demanda, e são comprados menos frequentemente, pois as pessoas investem em utensílios de qualidade que duram mais.
+    ![Image](https://github.com/user-attachments/assets/6daf9f0a-cc46-4b58-99a1-ce70d8c21606)
 
-* **Desempenho dos vendedores**\
+* **Categorias de Produtos que mais venderam**
+  
+  ![Image](https://github.com/user-attachments/assets/f90d6284-f9a8-4e1c-adb8-f013075da41f)
+  
+Alguns fatores podem ter contribuído para que essas categorias tivessem mais vendas:
+1. **Cama, Mesa, Banho:** Esses itens são essenciais para qualquer residência, e as pessoas frequentemente investem em móveis de qualidade para o conforto e funcionalidade do lar.
+2. **Beleza e Saúde:** Produtos de beleza e saúde são comprados regularmente, pois fazem parte da rotina diária e dos cuidados pessoais. A demanda constante por esses produtos contribui para suas altas vendas.
+3. **Esporte e Lazer:** A popularidade de produtos esportivos e de lazer pode ser atribuída ao aumento do interesse em atividades físicas e hobbies. Muitas pessoas buscam melhorar seu bem-estar e se divertir em seu tempo livre.
+4. **Informática e Acessórios:** Nos dias de hoje, a tecnologia é uma parte central da vida cotidiana. Produtos como laptops, tablets, acessórios e periféricos são frequentemente atualizados, levando a uma alta demanda.
+5. **Móveis e Decoração:** A decoração do lar é uma forma de expressão pessoal e muitas pessoas gostam de renovar e personalizar seus espaços. Produtos de móveis e decoração são populares para criar ambientes acolhedores e estilosos.
+* **Categorias de Produtos que menos venderam**
+  
+    ![Image](https://github.com/user-attachments/assets/90308fb4-085d-45ba-8782-0909b78b0a16)
+
+Esses fatores podem ter contribuído para que essas categorias tivessem menos vendas:
+1. **Seguros e Serviços:** Esses produtos são comprados com pouca frequência, pois os serviços são contratados por períodos longos, como anualmente, e a decisão de contratar um seguro pode ser complexa.
+2. **PC Gamer:**  Produtos para gamers têm um público específico e vendem menos em comparação com categorias mais amplas. Seu preço elevado pode limitar o número de compradores.
+3. **Fashion - Roupas Infantojuvenis:** A demanda por roupas infantis e juvenis é sazonal e depende da idade das crianças e de suas preferências de estilo.
+4. **CDS e DVDs Musicais:** Com o crescimento do streaming, a demanda por CDs e DVDs caiu, pois muitos preferem a conveniência do streaming.
+5. **La Cuisine:** Produtos de cozinha podem ter vendas baixas sem promoção ou alta demanda, e são comprados menos frequentemente, pois as pessoas investem em utensílios de qualidade que duram mais.
+
+* **Desempenho dos vendedores**
+
+    ![Image](https://github.com/user-attachments/assets/8f9ab1c7-296b-4ae2-b997-d85ebea6fc49)
+
 Percebe-se que há uma enorme diferença entre os valores das vendas dos 5 primeiros vendedores e dos 5 últimos. Isso pode indicar que esses últimos são novos, têm menos visibilidade ou estão vendendo produtos menos populares.
 
-* **Distribuição Geográfica das Compras:**
-    1. **Distribuição Geográfica:** Os estados com mais compras estão localizados principalmente no sul e sudeste do Brasil, que são regiões mais desenvolvidas e com maior densidade populacional. Em contraste, os estados com menos compras estão localizados na região norte, que enfrenta desafios logísticos e menor densidade populacional.
-    2. **Volume de Compras:** Há uma diferença significativa no número de compras entre os estados com mais e menos compras. São Paulo, por exemplo, tem mais de 31.000 compras, enquanto Roraima tem apenas 28 compras. Isso pode ser atribuído a fatores como população, acesso à internet e infraestrutura.
-    3. **Potencial de Crescimento:** Os estados com menos compras têm potencial para crescimento. Investir em melhorias de infraestrutura, marketing direcionado e parcerias locais pode ajudar a aumentar as vendas nessas áreas.
+* **Distribuição Geográfica das Compras**
 
-* **Market Share:**\
+    ![Image](https://github.com/user-attachments/assets/5d6cde5c-276f-4e08-b3c9-4062179b815f)
+
+1. **Distribuição Geográfica:** Os estados com mais compras estão localizados principalmente no sul e sudeste do Brasil, que são regiões mais desenvolvidas e com maior densidade populacional. Em contraste, os estados com menos compras estão localizados na região norte, que enfrenta desafios logísticos e menor densidade populacional.
+2. **Volume de Compras:** Há uma diferença significativa no número de compras entre os estados com mais e menos compras. São Paulo, por exemplo, tem mais de 31.000 compras, enquanto Roraima tem apenas 28 compras. Isso pode ser atribuído a fatores como população, acesso à internet e infraestrutura.
+3. **Potencial de Crescimento:** Os estados com menos compras têm potencial para crescimento. Investir em melhorias de infraestrutura, marketing direcionado e parcerias locais pode ajudar a aumentar as vendas nessas áreas.
+
+* **Market Share**\
 Market share, ou participação de mercado, é a porcentagem das vendas ou receitas totais de um vendedor em relação às vendas ou receitas totais.
+
+    ![Image](https://github.com/user-attachments/assets/6d2fb747-eae0-46c1-ad97-dac1cfdcfa77)
+
 A participação de mercado mostra uma diferença pequena. Todos os vendedores têm um bom desempenho, mas há espaço para crescimento, especialmente para os vendedores com menor participação de mercado.
 
-* **Média Móvel:**\
+* **Média Móvel**\
 Em estatística, a média móvel é um recurso utilizado para se identificar a tendência de 
 um conjunto de dados dispostos em uma série de tempo. 
 A média móvel de três meses é a soma 
-dos valores das vendas dos últimos três meses divido por 3. 
-    1. **Média Móvel Inicial**\
+dos valores das vendas dos últimos três meses divido por 3.
+
+    ![Image](https://github.com/user-attachments/assets/bc3fdb44-bcf6-4148-92c3-98e9deb378ab)
+
+1. **Média Móvel Inicial**\
     Nos primeiros dois meses de cada categoria (2017-09 e 2017-10), a média móvel é 0. Isso ocorre porque são necessários três meses para começar a calcular uma média móvel de janela 3 (ou seja, baseando-se em três períodos anteriores).
-    2. **Tendências**
-        * **Beleza e Saúde:** Vendas aumentam de forma consistente até julho de 2018, com a média móvel acompanhando o crescimento. Isso indica uma tendência clara de crescimento.
-        * **Cama, Mesa e Banho:** Flutuações são mais visíveis, especialmente em janeiro de 2018, onde as vendas aumentam significativamente, mas a média móvel consegue suavizar essas variações.
-        * **Esporte e Lazer:** As vendas atingem um pico em março de 2018 e depois declinam. A média móvel reflete esse comportamento, mas com uma suavização visível.
-        * **Informática e Acessórios:** Após um pico em fevereiro de 2018, as vendas apresentam uma tendência de declínio, mas a média móvel suaviza essas quedas.
-        * **Móveis e Decoração:** Há flutuações significativas, com um aumento inicial e depois um declínio. A média móvel ajuda a identificar a tendência geral.
-    3. **Tendência Geral:** Percerbe-se um pico geral na média móvel dessas categorias entre os meses de dezembro de 2017 e janiero de 2018 e entre fevereiro e março de 2018. Isso pode ter ocorrido devido a alguma promoção na plataforma durante esse período.
+2. **Tendências**
+    * **Beleza e Saúde:** Vendas aumentam de forma consistente até julho de 2018, com a média móvel acompanhando o crescimento. Isso indica uma tendência clara de crescimento.
+    * **Cama, Mesa e Banho:** Flutuações são mais visíveis, especialmente em janeiro de 2018, onde as vendas aumentam significativamente, mas a média móvel consegue suavizar essas variações.
+    * **Esporte e Lazer:** As vendas atingem um pico em março de 2018 e depois declinam. A média móvel reflete esse comportamento, mas com uma suavização visível.
+    * **Informática e Acessórios:** Após um pico em fevereiro de 2018, as vendas apresentam uma tendência de declínio, mas a média móvel suaviza essas quedas.
+    * **Móveis e Decoração:** Há flutuações significativas, com um aumento inicial e depois um declínio. A média móvel ajuda a identificar a tendência geral.
+3. **Tendência Geral**\
+   Percerbe-se um pico geral na média móvel dessas categorias entre os meses de dezembro de 2017 e janiero de 2018 e entre fevereiro e março de 2018. Isso pode ter ocorrido devido a alguma promoção na plataforma durante esse período.
 
 ## Dashboard
+
+![Image](https://github.com/user-attachments/assets/b3e11a0f-3a93-403f-b25a-c27fc0fbafb0)
 
 
 ## Contribuições
