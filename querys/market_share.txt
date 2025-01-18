@@ -1,0 +1,40 @@
+with filtered_sales as (  -- cria uma CTE chamada 'filtered_sales'
+    select
+        olist.order_items.seller_id,  -- seleciona o ID do vendedor
+        sum(cast(olist.order_items.price as numeric)) as total_revenue  -- soma os preços dos itens de pedido e os converte para numérico para calcular a receita total
+    from
+        olist.orders  -- A tabela principal 'orders'
+    inner join olist.order_items on olist.orders.order_id = olist.order_items.order_id  -- faz uma junção entre 'orders' e 'order_items' baseando-se no 'order_id'
+    where -- filtra as ordens com status 'delivered' e dentro do intervalo de tempo entre 1 de setembro de 2017 e 1 de setembro de 2018.
+        olist.orders.order_status = 'delivered'  
+        and olist.orders.order_purchase_timestamp >= '2017-09-01'  
+        and olist.orders.order_purchase_timestamp < '2018-09-01'  
+    group by
+        olist.order_items.seller_id  -- agrupa os dados por 'seller_id'
+),
+total_market as (  -- cria uma CTE chamada 'total_market'
+    select
+        sum(total_revenue) as total_market_revenue  -- soma a receita total dos vendedores para obter a receita total do mercado
+    from
+        filtered_sales  -- utiliza a CTE 'filtered_sales'
+),
+top_sellers as (  -- cria uma CTE chamada 'top_sellers'
+    select
+        seller_id,  -- seleciona o ID do vendedor
+        total_revenue,  -- seleciona a receita total do vendedor
+        rank() over (order by total_revenue desc) as rank  -- ranqueia os vendedores com base na receita total em ordem decrescente
+    from
+        filtered_sales  -- utiliza a CTE 'filtered_sales'
+)
+select
+    top_sellers.seller_id,  -- seleciona o ID do vendedor
+    top_sellers.total_revenue,  -- seleciona a receita total do vendedor
+    round((top_sellers.total_revenue / total_market.total_market_revenue) * 100, 2) as market_share_percentage  -- calcula a participação no mercado do vendedor 
+from
+    top_sellers  -- utiliza a CTE 'top_sellers'
+cross join -- produto cartesiano (gera combinações completas entre duas ou mais tabelas sem necessariamente ter uma coluna correspondente em comum)
+    total_market  -- utiliza a CTE 'total_market' sem condições de junção para combinar cada linha de 'top_sellers' com cada linha de 'total_market'
+where
+    top_sellers.rank <= 5  -- filtra para incluir apenas os 5 principais vendedores
+order by
+    market_share_percentage desc;  -- ordena os resultados pela participação no mercado em ordem decrescente

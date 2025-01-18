@@ -1,0 +1,70 @@
+with filtered_sales as (  -- cria uma CTE chamada 'filtered_sales' que filtra e calcula as vendas mensais por categoria de produto no período de um ano
+    select
+        olist.products.product_category_name,  -- seleciona o nome da categoria do produto
+        date_trunc('month', olist.orders.order_purchase_timestamp) as sales_month,  -- trunca a data para o mês das compras 
+        count(olist.order_items.order_item_id) as total_sales  -- conta o número total de itens vendidos
+    from
+        olist.orders  -- tabela 'orders'
+    inner join olist.order_items on olist.orders.order_id = olist.order_items.order_id  -- junta 'orders' e 'order_items' baseado no 'order_id'
+    inner join olist.products on olist.order_items.product_id = olist.products.product_id  -- junta 'order_items' e 'products' baseado no 'product_id'
+    where -- filtra as ordens com status 'delivered' e dentro do intervalo de tempo entre 1 de setembro de 2017 e 1 de setembro de 2018.
+        olist.orders.order_status = 'delivered'  
+        and olist.orders.order_purchase_timestamp >= '2017-09-01'  
+        and olist.orders.order_purchase_timestamp < '2018-09-01' 
+    group by
+        olist.products.product_category_name,  -- agrupa por nome da categoria do produto
+        date_trunc('month', olist.orders.order_purchase_timestamp)  -- agrupa por mês das compras
+),
+top_categories as (  -- cria uma CTE chamada 'top_categories' que determina as 5 principais categorias com base no número total de vendas
+    select
+        filtered_sales.product_category_name,  -- seleciona o nome da categoria do produto
+        sum(filtered_sales.total_sales) as total_sales  -- soma o total de vendas
+    from
+        filtered_sales  -- utiliza a CTE 'filtered_sales'
+    group by
+        filtered_sales.product_category_name  -- agrupa por nome da categoria do produto
+    order by
+        sum(filtered_sales.total_sales) desc  -- ordena por total de vendas em ordem decrescente
+    limit 5  -- limita aos 5 principais categorias
+),
+category_sales as (  -- cria uma CTE chamada 'category_sales' que seleciona as vendas mensais das categorias principais
+    select
+        filtered_sales.product_category_name,  -- seleciona o nome da categoria do produto
+        filtered_sales.sales_month,  -- seleciona o mês de venda
+        filtered_sales.total_sales  -- seleciona o total de vendas
+    from
+        filtered_sales  -- utiliza a CTE 'filtered_sales'
+    inner join
+        top_categories on filtered_sales.product_category_name = top_categories.product_category_name  -- junta com 'top_categories' baseado no nome da categoria
+),
+moving_average as (
+    select
+        category_sales.product_category_name,  -- Nome da categoria do produto
+        category_sales.sales_month,  -- Mês de venda
+        category_sales.total_sales,  -- Total de vendas
+        case
+            when row_number() over (
+                partition by category_sales.product_category_name
+                order by category_sales.sales_month
+            ) < 3 then 0  -- Para os dois primeiros meses, definir média móvel como 0
+            else round(
+                avg(category_sales.total_sales) over (
+                    partition by category_sales.product_category_name
+                    order by category_sales.sales_month
+                    rows between 2 preceding and current row
+                ), 2
+            )
+        end as moving_avg_3_months  -- Média móvel de 3 meses
+    from
+        category_sales
+)
+select
+    moving_average.product_category_name,  -- seleciona o nome da categoria do produto
+    moving_average.sales_month,  -- seleciona o mês de venda
+    moving_average.total_sales,  -- seleciona o total de vendas
+    moving_average.moving_avg_3_months  -- seleciona a média móvel de 3 meses
+from
+    moving_average  -- utiliza a CTE 'moving_average'
+order by
+    moving_average.product_category_name,  -- ordena por nome da categoria do produto
+    moving_average.sales_month;  -- ordena por mês de venda

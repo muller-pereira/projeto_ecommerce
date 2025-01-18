@@ -1,0 +1,22 @@
+with state_purchases as ( -- cria uma CTE chamada state_purchases
+	select -- seleciona o Estado do cliente e conta o número de compras
+		olist.customers.customer_state,
+		count(olist.orders.order_id) as total_purchases 
+	from -- junta as tabelas olist_orders e olist_customers com base no customer_id.
+		olist.orders
+	inner join olist.customers on olist.orders.customer_id = olist.customers.customer_id
+	where -- filtra as ordens com status 'delivered' e dentro do intervalo de tempo entre 1 de setembro de 2017 e 1 de setembro de 2018.
+		olist.orders.order_status = 'delivered'
+		and olist.orders.order_purchase_timestamp >= '2017-09-01'
+		and olist.orders.order_purchase_timestamp < '2018-09-01'
+	group by -- agrupa os resultados pelo Estado do cliente
+		olist.customers.customer_state
+)
+select -- seleciona o Estado do cliente e o total de compras da CTE
+	state_purchases.customer_state,
+	state_purchases.total_purchases
+from
+	state_purchases
+order by -- ordena os resultados pelo número total de compras em ordem decrescente.
+	state_purchases.total_purchases desc
+limit 5;

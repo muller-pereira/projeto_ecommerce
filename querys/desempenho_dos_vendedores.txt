@@ -1,0 +1,34 @@
+with filtered_sales as ( -- define uma CTE (tabela temporária) chamada filtered_sales
+    select
+        olist.orders.order_id,
+        olist.order_items.seller_id,
+        sum(olist.order_items.price) as total_revenue -- calcula a soma dos preços do itens vendidos
+    from
+        olist.orders
+    inner join olist.order_items on olist.orders.order_id = olist.order_items.order_id  -- junta as tabelas olist.orders e olist.order_items com base no order_id
+    where
+        olist.orders.order_status = 'delivered' -- filtra as ordens com status 'delivered' e dentro do intervalo de tempo entre 1 de setembro de 2017 e 1 de setembro de 2018.
+		and olist.orders.order_purchase_timestamp >= '2017-09-01'
+		and olist.orders.order_purchase_timestamp < '2018-09-01'
+    group by -- agrupa os resultados por order_id e seller_id para calcular a soma dos preços por vendedor e pedido.
+        olist.orders.order_id, olist.order_items.seller_id ),
+seller_sales as ( -- cria uma CTE selles_sales
+    select
+        filtered_sales.seller_id,
+        sum(filtered_sales.total_revenue) as total_sales -- seleciona seller_id e calcula a soma das receitas totais de cada vendedor.
+    from
+        filtered_sales
+    group by -- agrupa os dados por seller_id para calcular a soma total das vendas.
+        filtered_sales.seller_id
+)
+select -- seleciona seller_id e total_sales, juntando seller_sales com a tabela olist.sellers para obter os nomes dos vendedores.
+    olist.sellers.seller_id,
+    seller_sales.total_sales
+from
+    seller_sales
+inner join olist.sellers on seller_sales.seller_id = olist.sellers.seller_id
+order by
+    seller_sales.total_sales desc
+limit 5;
+
+

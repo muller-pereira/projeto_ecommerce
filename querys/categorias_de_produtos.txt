@@ -1,0 +1,31 @@
+with filtered_orders as ( -- cria uma CTE chamada filtered_orders 
+	select -- seleciona order_id da tabela olist.orders, product_id da tabela olist.order_items e product_category_name da tabela olist.roducts
+		olist.orders.order_id,
+		olist.order_items.product_id,
+		olist.products.product_category_name
+	from -- especifica a tabela olist.orders como a tabela principal
+		olist.orders 
+	inner join olist.order_items on olist.orders.order_id = olist.order_items.order_id -- realiza uma junção interna com a tabela olist_order_items onde order_id coincide nas duas tabelas
+	inner join olist.products on olist.order_items.product_id = olist.products.product_id -- realiza uma junção interna com a tabela olist_products onde product_id coincide nas duas tabelas
+	where -- filtra os pedidos que têm status 'delivered' e foram feitos entre 1º de setembro de 2017 e 1º de setembro de 2018.
+		olist.orders.order_status = 'delivered'
+		and olist.orders.order_purchase_timestamp >= '2017-09-01'
+		and olist.orders.order_purchase_timestamp < '2018-09-01'
+),
+category_sales as ( -- cria uma CTE chamada category_sales
+	select -- seleciona product_category_name e conta o número de ocorrências de product_category_name, nomeando a contagem como total_sales
+		product_category_name,
+		count(*) as total_sales
+	from -- especifica a CTE filtered_orders como a fonte dos dados.
+		filtered_orders
+	group by -- agrupa os resultados pelo nome da categoria de produto (product_category_name).
+		product_category_name
+) 
+select -- seleciona product_category_name e total_sales da CTE category_sales
+	product_category_name, 
+	total_sales 
+from 
+	category_sales 
+order by -- ordena os resultados pela contagem total de vendas (total_sales) em ordem decrescente.
+	total_sales desc
+limit 5;

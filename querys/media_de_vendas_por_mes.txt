@@ -1,0 +1,13 @@
+with monthly_sales as ( -- cria uma CTE (tabela temporária) nomeada de monthly_sales
+	select
+		date_trunc('month', order_purchase_timestamp) as month, -- trunca o mês
+		count(*) as total_orders -- conta as vendas por mês
+	from olist.orders
+	where order_status = 'delivered' -- filtra apenas os pedidos com status entregue
+	group by date_trunc('month', order_purchase_timestamp) -- agrupa os dados pelo mês
+	order by 1,2 
+)
+select 
+round(avg(total_orders), 2) as avg_sales_per_month, -- calcula a média de vendas por mês
+round(stddev_pop(total_orders), 2) as standard_deviation_sales -- calcula o desvio padrão
+from monthly_sales
