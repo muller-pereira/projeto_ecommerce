@@ -137,7 +137,7 @@ As querys (consultas) estão localizadas na pasta querys deste projeto.
 5. **Market Share:** Cálculo do percentual de market share dos 5 vendedores que mais venderam nos últimos 12 meses de registro.
 6. **Média Móvel:** Cálculo da Média Móvel de 3 meses dos últimos 12 meses da quantidade de vendas das 5 categorias mais vendidas.
 
-## Resultados 
+## Resultados  | :memo:
 * A **média de vendas mensais** foi de 4194,7, porém o desvio padrão foi de 2426,64, o que indica que os dados estão muito dispersos. Em outras palavras, tiveram meses com muitas vendas e meses com pouquísimas vendas. Isso fica evidenciado na imagem a seguir:
 
 * **Categorias de Produtos que mais venderam:**\
