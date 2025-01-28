@@ -1,0 +1,47 @@
+-- Cria uma CTE nomeada de monthly_sales
+WITH monthly_sales AS (
+    SELECT
+        -- Trunca a data para o início do mês
+        date_trunc('month', order_purchase_timestamp) AS month,
+        -- Conta o total de pedidos por mês
+        count(*) AS total_orders
+    FROM olist.orders
+    -- Filtra apenas os pedidos com status 'delivered' (entregue)
+    WHERE order_status = 'delivered'
+    -- Agrupa os dados pelo mês truncado
+    GROUP BY date_trunc('month', order_purchase_timestamp)
+),
+-- CTE para calcular o primeiro (Q1) e terceiro quartis (Q3)
+quartiles AS (
+    SELECT
+        -- Calcula o primeiro quartil (25º percentil)
+        percentile_cont(0.25) WITHIN GROUP (ORDER BY total_orders) AS Q1,
+        -- Calcula o terceiro quartil (75º percentil)
+        percentile_cont(0.75) WITHIN GROUP (ORDER BY total_orders) AS Q3
+    FROM monthly_sales
+),
+-- CTE para calcular o intervalo interquartil (IQR)
+iqr_calc AS (
+    SELECT
+        Q1,
+        Q3,
+        -- Calcula o intervalo interquartil (IQR)
+        (Q3 - Q1) AS IQR
+    FROM quartiles
+)
+-- Consulta principal para identificar outliers
+SELECT
+    month,
+    total_orders,
+    -- Identifica o status de outlier com base em Q1, Q3 e IQR
+    CASE 
+        -- Se total_orders for menor que Q1 - 1.5 * IQR, é um outlier abaixo do limite inferior
+        WHEN total_orders < (Q1 - 1.5 * IQR) THEN 'Below lower bound'
+        -- Se total_orders for maior que Q3 + 1.5 * IQR, é um outlier acima do limite superior
+        WHEN total_orders > (Q3 + 1.5 * IQR) THEN 'Above lower bound'
+        -- Caso contrário, é considerado normal
+        ELSE 'Normal'
+    END AS outlier_status
+FROM monthly_sales, iqr_calc
+-- Ordena os resultados pelo mês
+ORDER BY month;
