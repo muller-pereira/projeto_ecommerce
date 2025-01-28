@@ -138,9 +138,14 @@ As querys (consultas) estão localizadas na pasta querys deste projeto.
 6. **Média Móvel:** Cálculo da Média Móvel de 3 meses dos últimos 12 meses da quantidade de vendas das 5 categorias mais vendidas.
 
 ## Resultados  | :memo:
-* A **média de vendas mensais** foi de 4194,7, porém o desvio padrão foi de 2426,64, o que indica que os dados estão muito dispersos. Em outras palavras, tiveram meses com muitas vendas e meses com pouquísimas vendas. Isso fica evidenciado na imagem a seguir:
 
-    ![Image](https://github.com/user-attachments/assets/6daf9f0a-cc46-4b58-99a1-ce70d8c21606)
+* Antes de calcular a média de vendas mensais, eu verifiquei se existia outlier nas vendas, ou seja, se tinha algum valor que se diferenciava muito dos demais, sendo muito maior ou muito menor. Não foi encontrado nenhum outlier, então eu segui para o cálculo da média.
+
+  ![Image](https://github.com/user-attachments/assets/cc887b2e-e8d2-41e5-bbcb-6fd7285897f6)
+
+* A **média de vendas mensais** foi de 4194,7, porém o desvio padrão foi de 2426,64, o que indica que os dados estão muito dispersos. Em outras palavras, tiveram meses com muitas vendas e meses com pouquísimas vendas.
+
+  ![Image](https://github.com/user-attachments/assets/798b94bb-0d98-4d57-924b-8f7ad2a3354f)
 
 * **Categorias de Produtos que mais venderam**
   
